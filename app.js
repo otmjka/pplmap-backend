@@ -1,14 +1,17 @@
 var createError = require('http-errors');
 var express = require('express');
+const cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var {v4: uuidv4} = require('uuid');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+let persons = []
 var app = express();
 
+app.use(cors())
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -21,6 +24,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.post('/persons/add', (req, res) => {
+  persons.push({...req.body, id: uuidv4()})
+  res.sendStatus(200)
+})
+
+app.post('/persons/flush', (req, res) => {
+  persons = []
+  res.sendStatus(200)
+})
+
+app.get('/persons', (req, res) => {
+  res.send(persons)
+})
+
+app.get('/persons/:uuid', (req, res, next) => {
+  const person = persons.find(p => p === params.uuid)
+  if (!person) {
+    next(createError(500))
+    return
+  }
+  res.send(person)
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
