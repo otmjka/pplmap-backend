@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  main:
+    image: node:12-slim
+    environment:
+      PORT: 3001
+      POSTGRES_URI: postgres://postgres:postgres@postgres/postgres
+      ENVIRONMENT: local
+      LOG_LEVEL: debug
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/code
+    working_dir: /code
+    ports: ['3001:3001']
+    command: './node_modules/.bin/ts-node-dev --transpile-only src/index.ts'
+    depends_on: [postgres]
+
+  postgres:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports: ['5432:5432']
