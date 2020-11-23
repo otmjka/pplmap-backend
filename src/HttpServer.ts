@@ -17,7 +17,7 @@ export default class HttpServer {
   db: Db;
   status: 'created' | 'started';
 
-  constructor({ port, db }: { port: number; serviceName: string; db: Db }) {
+  constructor({ port, db }: { port: number; db: Db }) {
     this.port = port;
     this.db = db;
     this.status = 'created';
@@ -53,12 +53,6 @@ export default class HttpServer {
     });
 
     this.expressApp.get('/persons/:uuid', (req: Request, res: Response) => {
-      // const person = persons.find(p => p === params.uuid)
-      // if (!person) {
-      //   next(createError(500))
-      //   return
-      // }
-      // res.send(person)
       res.send({});
     });
   }

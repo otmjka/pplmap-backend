@@ -29,6 +29,7 @@ const httpServer = new HttpServer({
 
 (async (): Promise<void> => {
   try {
+    console.log(process.cwd());
     await migrate({
       target: '001',
       pgpdb: db.db,
