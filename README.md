@@ -33,3 +33,12 @@ npx tsc --noEmit false
 ```
 ENVIRONMENT=local PORT=3001 POSTGRES_URI='postgres://postgres:postgres@127.0.0.1:5432/postgres' node build/index.js
 ```
+
+ENV PORT=3001
+ENV POSTGRES_URI=postgres://postgres:postgres@host.docker.internal:5432/postgres
+ENV ENVIRONMENT=production
+ENV LOG_LEVEL=debug
+
+docker build -t pplmap-backend-000:latest .
+
+// ENV POSTGRES_URI=postgres://postgres:postgres@host.docker.internal:5432/postgres

@@ -19,7 +19,10 @@ if (!config) {
 }
 
 const db = new Db({
-  connectionString: config.postgresUri,
+  dbUser: config.dbUser,
+  databaseUrl: config.databaseUrl,
+  dbName: config.dbName,
+  dbPassword: config.dbPassword,
 });
 
 const httpServer = new HttpServer({

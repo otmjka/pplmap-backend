@@ -9,8 +9,19 @@ export default class Db extends EventEmitter {
   db: IDatabase<{}>;
   queryFiles: { [queryName: string]: QueryFile };
 
-  constructor({ connectionString }: { connectionString: string }) {
+  constructor({
+    dbUser,
+    databaseUrl,
+    dbName,
+    dbPassword,
+  }: {
+    dbUser: string;
+    dbPassword: string;
+    databaseUrl: string;
+    dbName: string;
+  }) {
     super();
+    const connectionString = `postgres://${dbUser}:${dbPassword}@${databaseUrl}/${dbName}`;
     this.db = pgPromise()(connectionString);
 
     this.queryFiles = {};
