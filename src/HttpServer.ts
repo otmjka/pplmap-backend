@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 import Db from './Db';
 
@@ -23,7 +24,10 @@ export default class HttpServer {
     this.status = 'created';
 
     this.expressApp = express();
-
+    this.expressApp.use(cors({
+      origin: 'http://localhost:3000',
+      optionsSuccessStatus: 200 // For legacy browser support
+    }));
     this.expressApp.use(bodyParser.json());
     this.expressApp.use(bodyParser.urlencoded({ extended: false }));
 

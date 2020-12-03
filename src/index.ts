@@ -18,11 +18,20 @@ if (!config) {
   process.exit(1);
 }
 
+console.log(
+  '###',
+  `
+  ENVIRONMENT: ${process.env.ENVIRONMENT}
+  PORT: ${process.env.PORT}
+  DB_NAME: ${process.env.DB_NAME}
+  DB_PASSWORD: ${process.env.DB_PASSWORD}
+  DB_USER: ${process.env.DB_USER}
+  DATABASE_URL: ${process.env.DATABASE_URL}
+`,
+);
+
 const db = new Db({
-  dbUser: config.dbUser,
   databaseUrl: config.databaseUrl,
-  dbName: config.dbName,
-  dbPassword: config.dbPassword,
 });
 
 const httpServer = new HttpServer({

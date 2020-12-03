@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "strict": true,
-    "outDir": "build", 
+    "outDir": "src", 
     "typeRoots": ["./node_modules/@types", "./typings"]
   },
   "include": ["src", "__tests__"],
