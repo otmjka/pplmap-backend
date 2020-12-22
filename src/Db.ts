@@ -2,7 +2,7 @@ import path from 'path';
 import { EventEmitter } from 'events';
 import pgPromise, { IDatabase, QueryFile } from 'pg-promise';
 
-const QUERY_NAMES = ['personsList', 'addPerson', 'flushPersons'];
+const QUERY_NAMES = ['personsList', 'addPerson', 'flushPersons', 'deletePerson'];
 const QUERY_FILES_DIR = path.resolve(__dirname, 'sql');
 
 export default class Db extends EventEmitter {
@@ -41,6 +41,14 @@ export default class Db extends EventEmitter {
     await this.db.none(this.queryFiles.addPerson, {
       person_name,
       birthday: new Date(birthday),
+    });
+  }
+
+  async deletePerson({
+    id
+  }: {id: string}): Promise<void> {
+    await this.db.none(this.queryFiles.deletePerson, {
+      id
     });
   }
 

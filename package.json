@@ -2,6 +2,9 @@
   "name": "backend",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "start": "node index.js",
     "debug": "ENVIRONMENT=local PORT=3001 POSTGRES_URI='postgres://postgres:postgres@127.0.0.1:5432/postgres' node build/index.js",
