@@ -73,3 +73,7 @@ heroku container:push web
 
 - [setup postgres service](https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres)
 - [heroku docker](https://devcenter.heroku.com/articles/container-registry-and-runtime)
+
+## Express cors
+
+- (Handling CORS with Node.js)[https://stackabuse.com/handling-cors-with-node-js/]

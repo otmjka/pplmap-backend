@@ -24,8 +24,9 @@ export default class HttpServer {
     this.status = 'created';
 
     this.expressApp = express();
+
     this.expressApp.use(cors({
-      origin: 'http://localhost:3000',
+      origin: ['http://localhost:3000', 'https://tranquil-garden-69631.herokuapp.com'],
       optionsSuccessStatus: 200 // For legacy browser support
     }));
     this.expressApp.use(bodyParser.json());
@@ -39,6 +40,21 @@ export default class HttpServer {
           person_name: req.body.name,
           birthday: req.body.birthday,
         });
+        res.sendStatus(200);
+      },
+    );
+
+    this.expressApp.post(
+      '/persons/delete/:uuid',
+      async (req: Request, res: Response) => {
+        const {uuid} = req.params
+        try {
+        await this.db.deletePerson({
+          id: uuid
+        });
+      } catch(error) {
+        console.log(error)
+      }
         res.sendStatus(200);
       },
     );
